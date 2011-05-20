@@ -10196,7 +10196,7 @@ echo "${ECHO_T}$ac_cv_lib_freetype_FT_Get_Name_Index" >&6
 if test $ac_cv_lib_freetype_FT_Get_Name_Index = yes; then
   smr_have_freetype2_library=yes
 else
-  smr_have_freetype2_library=no
+  smr_have_freetype2_library=yes
 fi
 
     fi
