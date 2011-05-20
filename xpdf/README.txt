@@ -14,7 +14,7 @@ Windows:
 
 OSX:
     - cd xpdf-3.02
-    - ./configure
+    - ./configure --with-freetype2-library="../.../freetype/lib/macx" --with-freetype2-includes="../../freetype/freetyep-2.4.4/include"
     - cd ..
     - qmake xpdf.pro -spec macx-g++
     - make
