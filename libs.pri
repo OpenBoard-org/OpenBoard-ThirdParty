@@ -11,7 +11,7 @@ win32 {
     SUB_LIB = "win32"
 }
 
-FREETYPE_DIR = "$$PWD/freetype/freetype-2.4.4"
+FREETYPE_DIR = "$PWD/freetype/freetype-2.4.4"
 LIBS        += "-L$$PWD/freetype/lib/$$SUB_LIB" "-lfreetype"
 # no INCLUDEPATH, freetype is not used directly
 
