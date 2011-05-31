@@ -24,7 +24,4 @@ Linux:
     - ./configure --with-freetype2-library="../../freetype/lib/linux" --with-freetype2-includes="../../freetype/freetype-2.4.4/include"
     - cd ..
     - qmake xpdf.pro -spec linux-g++
-    - make:
-
-- Run qmake (-spec macx-g++ on OSX)
-- Run make (nmake on windows)
+    - make
