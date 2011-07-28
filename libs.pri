@@ -41,8 +41,8 @@ win32 {
 }
 
 macx {
-    QMAKE_CFLAGS += "-F$$PWD/Frameworks"
-    LIBS         += "-F$$PWD/Frameworks"
+#    QMAKE_CFLAGS += "-F$$PWD/Frameworks"
+#    LIBS         += "-F$$PWD/Frameworks"
     
     LIBS         += "-framework QuickTime"
     LIBS         += "-framework QuartzCore"
