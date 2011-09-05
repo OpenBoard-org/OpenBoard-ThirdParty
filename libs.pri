@@ -3,6 +3,10 @@ linux-g++ {
     SUB_LIB = "linux"
 }
 
+linux-g++-32 {
+    SUB_LIB = "linux"
+}
+
 macx {
     SUB_LIB = "macx"
 }
