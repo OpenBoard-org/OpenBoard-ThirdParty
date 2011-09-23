@@ -1,41 +1,39 @@
+INCLUDEPATH += $$PWD \
+	      "$$PWD/../zlib/1.2.3/include"
 
-INCLUDEPATH  += "$$PWD/../zlib/1.2.3/include"
+DEPENDPATH += $$PWD
 
-HEADERS += crypt.h \
-           ioapi.h \
-           quazip.h \
-           quazipfile.h \
-           quazipfileinfo.h \
-           quazipnewinfo.h \
-           unzip.h \
-           zip.h
-
-SOURCES += ioapi.c \
-           quazip.cpp \
-           quazipfile.cpp \
-           quazipnewinfo.cpp \
-           unzip.c \
-           zip.c
-
+HEADERS += $$PWD/crypt.h \
+           $$PWD/ioapi.h \
+           $$PWD/JlCompress.h \
+           $$PWD/quaadler32.h \
+           $$PWD/quachecksum32.h \
+           $$PWD/quacrc32.h \
+           $$PWD/quazip.h \
+           $$PWD/quazipfile.h \
+           $$PWD/quazipfileinfo.h \
+           $$PWD/quazipnewinfo.h \
+           $$PWD/unzip.h \
+           $$PWD/zip.h
+SOURCES += $$PWD/qioapi.cpp \
+           $$PWD/JlCompress.cpp \
+           $$PWD/quaadler32.cpp \
+           $$PWD/quacrc32.cpp \
+           $$PWD/quazip.cpp \
+           $$PWD/quazipfile.cpp \
+           $$PWD/quazipnewinfo.cpp \
+           $$PWD/unzip.c \
+           $$PWD/zip.c
 
 macx {
-
    LIBS += -lz
 }
-
-win32 {
-    
-    LIBS     += "-L$$PWD/../zlib/1.2.3/lib" "-lzlib"
-   
+win32 {    
+   LIBS += "-L$$PWD/../zlib/1.2.3/lib" "-lzlib"
 }
-
 linux-g++ {
-
    LIBS += -lz
-
 }
 linux-g++-32 {
-
    LIBS += -lz
-
 }
