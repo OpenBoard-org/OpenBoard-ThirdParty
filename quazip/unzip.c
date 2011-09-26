@@ -4,8 +4,6 @@
    Copyright (C) 1998-2005 Gilles Vollant
 
    Read unzip.h for more info
-
-   Modified by Sergey A. Tachenov to integrate with Qt.
 */
 
 /* Decryption code comes from crypt.c by Info-ZIP but has been greatly reduced in terms of
@@ -396,8 +394,8 @@ local uLong unzlocal_SearchCentralDir(pzlib_filefunc_def,filestream)
      Else, the return value is a unzFile Handle, usable with other function
        of this unzip package.
 */
-extern unzFile ZEXPORT unzOpen2 (file, pzlib_filefunc_def)
-    voidpf file;
+extern unzFile ZEXPORT unzOpen2 (path, pzlib_filefunc_def)
+    const char *path;
     zlib_filefunc_def* pzlib_filefunc_def;
 {
     unz_s us;
@@ -418,12 +416,12 @@ extern unzFile ZEXPORT unzOpen2 (file, pzlib_filefunc_def)
         return NULL;
 
     if (pzlib_filefunc_def==NULL)
-        fill_qiodevice_filefunc(&us.z_filefunc);
+        fill_fopen_filefunc(&us.z_filefunc);
     else
         us.z_filefunc = *pzlib_filefunc_def;
 
     us.filestream= (*(us.z_filefunc.zopen_file))(us.z_filefunc.opaque,
-                                                 file,
+                                                 path,
                                                  ZLIB_FILEFUNC_MODE_READ |
                                                  ZLIB_FILEFUNC_MODE_EXISTING);
     if (us.filestream==NULL)
@@ -499,10 +497,10 @@ extern unzFile ZEXPORT unzOpen2 (file, pzlib_filefunc_def)
 }
 
 
-extern unzFile ZEXPORT unzOpen (file)
-    voidpf file;
+extern unzFile ZEXPORT unzOpen (path)
+    const char *path;
 {
-    return unzOpen2(file, NULL);
+    return unzOpen2(path, NULL);
 }
 
 /*
@@ -597,7 +595,7 @@ local int unzlocal_GetCurrentFileInfoInternal (file,
     unz_file_info_internal file_info_internal;
     int err=UNZ_OK;
     uLong uMagic;
-    uLong uSeek=0;
+    long lSeek=0;
 
     if (file==NULL)
         return UNZ_PARAMERROR;
@@ -663,7 +661,7 @@ local int unzlocal_GetCurrentFileInfoInternal (file,
     if (unzlocal_getLong(&s->z_filefunc, s->filestream,&file_info_internal.offset_curfile) != UNZ_OK)
         err=UNZ_ERRNO;
 
-    uSeek+=file_info.size_filename;
+    lSeek+=file_info.size_filename;
     if ((err==UNZ_OK) && (szFileName!=NULL))
     {
         uLong uSizeRead ;
@@ -678,7 +676,7 @@ local int unzlocal_GetCurrentFileInfoInternal (file,
         if ((file_info.size_filename>0) && (fileNameBufferSize>0))
             if (ZREAD(s->z_filefunc, s->filestream,szFileName,uSizeRead)!=uSizeRead)
                 err=UNZ_ERRNO;
-        uSeek -= uSizeRead;
+        lSeek -= uSizeRead;
     }
 
 
@@ -690,19 +688,19 @@ local int unzlocal_GetCurrentFileInfoInternal (file,
         else
             uSizeRead = extraFieldBufferSize;
 
-        if (uSeek!=0) {
-            if (ZSEEK(s->z_filefunc, s->filestream,uSeek,ZLIB_FILEFUNC_SEEK_CUR)==0)
-                uSeek=0;
+        if (lSeek!=0) {
+            if (ZSEEK(s->z_filefunc, s->filestream,lSeek,ZLIB_FILEFUNC_SEEK_CUR)==0)
+                lSeek=0;
             else
                 err=UNZ_ERRNO;
         }
         if ((file_info.size_file_extra>0) && (extraFieldBufferSize>0))
             if (ZREAD(s->z_filefunc, s->filestream,extraField,uSizeRead)!=uSizeRead)
                 err=UNZ_ERRNO;
-        uSeek += file_info.size_file_extra - uSizeRead;
+        lSeek += file_info.size_file_extra - uSizeRead;
     }
     else
-        uSeek+=file_info.size_file_extra;
+        lSeek+=file_info.size_file_extra;
 
 
     if ((err==UNZ_OK) && (szComment!=NULL))
@@ -716,19 +714,19 @@ local int unzlocal_GetCurrentFileInfoInternal (file,
         else
             uSizeRead = commentBufferSize;
 
-        if (uSeek!=0) {
-            if (ZSEEK(s->z_filefunc, s->filestream,uSeek,ZLIB_FILEFUNC_SEEK_CUR)==0)
-                uSeek=0;
+        if (lSeek!=0) {
+            if (ZSEEK(s->z_filefunc, s->filestream,lSeek,ZLIB_FILEFUNC_SEEK_CUR)==0)
+                lSeek=0;
             else
                 err=UNZ_ERRNO;
         }
         if ((file_info.size_file_comment>0) && (commentBufferSize>0))
             if (ZREAD(s->z_filefunc, s->filestream,szComment,uSizeRead)!=uSizeRead)
                 err=UNZ_ERRNO;
-        uSeek+=file_info.size_file_comment - uSizeRead;
+        lSeek+=file_info.size_file_comment - uSizeRead;
     }
     else
-        uSeek+=file_info.size_file_comment;
+        lSeek+=file_info.size_file_comment;
 
     if ((err==UNZ_OK) && (pfile_info!=NULL))
         *pfile_info=file_info;

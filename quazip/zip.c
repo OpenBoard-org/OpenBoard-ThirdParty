@@ -7,8 +7,6 @@
    Copyright (C) 1998-2005 Gilles Vollant
 
    Read zip.h for more info
-
-   Modified by Sergey A. Tachenov to integrate with Qt.
 */
 
 
@@ -18,7 +16,6 @@
 #include <time.h>
 #include "zlib.h"
 #include "zip.h"
-#include "quazip_global.h"
 
 #ifdef STDC
 #  include <stddef.h>
@@ -38,7 +35,7 @@
 /* compile with -Dlocal if your debugger can't find static symbols */
 
 #ifndef VERSIONMADEBY
-# define VERSIONMADEBY   (0x031e) /* best for standard pkware crypt */
+# define VERSIONMADEBY   (0x0) /* platform depedent */
 #endif
 
 #ifndef Z_BUFSIZE
@@ -89,7 +86,6 @@ const char zip_copyright[] =
 #define SIZEDATA_INDATABLOCK (4096-(4*4))
 
 #define LOCALHEADERMAGIC    (0x04034b50)
-#define DESCRIPTORHEADERMAGIC    (0x08074b50)
 #define CENTRALHEADERMAGIC  (0x02014b50)
 #define ENDHEADERMAGIC      (0x06054b50)
 
@@ -153,7 +149,6 @@ typedef struct
 #ifndef NO_ADDFILEINEXISTINGZIP
     char *globalcomment;
 #endif
-    unsigned flags;
 } zip_internal;
 
 
@@ -323,7 +318,7 @@ local void ziplocal_putValue_inmemory (dest, x, nbByte)
 
 local uLong ziplocal_TmzDateToDosDate(ptm,dosDate)
     const tm_zip* ptm;
-    uLong dosDate UNUSED;
+    uLong dosDate;
 {
     uLong year = (uLong)ptm->tm_year;
     if (year>1980)
@@ -502,8 +497,8 @@ local uLong ziplocal_SearchCentralDir(pzlib_filefunc_def,filestream)
 #endif /* !NO_ADDFILEINEXISTINGZIP*/
 
 /************************************************************/
-extern zipFile ZEXPORT zipOpen2 (file, append, globalcomment, pzlib_filefunc_def)
-    voidpf file;
+extern zipFile ZEXPORT zipOpen2 (pathname, append, globalcomment, pzlib_filefunc_def)
+    const char *pathname;
     int append;
     zipcharpc* globalcomment;
     zlib_filefunc_def* pzlib_filefunc_def;
@@ -514,13 +509,13 @@ extern zipFile ZEXPORT zipOpen2 (file, append, globalcomment, pzlib_filefunc_def
 
 
     if (pzlib_filefunc_def==NULL)
-        fill_qiodevice_filefunc(&ziinit.z_filefunc);
+        fill_fopen_filefunc(&ziinit.z_filefunc);
     else
         ziinit.z_filefunc = *pzlib_filefunc_def;
 
     ziinit.filestream = (*(ziinit.z_filefunc.zopen_file))
                  (ziinit.z_filefunc.opaque,
-                  file,
+                  pathname,
                   (append == APPEND_STATUS_CREATE) ?
                   (ZLIB_FILEFUNC_MODE_READ | ZLIB_FILEFUNC_MODE_WRITE | ZLIB_FILEFUNC_MODE_CREATE) :
                     (ZLIB_FILEFUNC_MODE_READ | ZLIB_FILEFUNC_MODE_WRITE | ZLIB_FILEFUNC_MODE_EXISTING));
@@ -532,7 +527,6 @@ extern zipFile ZEXPORT zipOpen2 (file, append, globalcomment, pzlib_filefunc_def
     ziinit.ci.stream_initialised = 0;
     ziinit.number_entry = 0;
     ziinit.add_position_when_writting_offset = 0;
-    ziinit.flags = ZIP_WRITE_DATA_DESCRIPTOR;
     init_linkedlist(&(ziinit.central_dir));
 
 
@@ -687,11 +681,11 @@ extern zipFile ZEXPORT zipOpen2 (file, append, globalcomment, pzlib_filefunc_def
     }
 }
 
-extern zipFile ZEXPORT zipOpen (file, append)
-    voidpf file;
+extern zipFile ZEXPORT zipOpen (pathname, append)
+    const char *pathname;
     int append;
 {
-    return zipOpen2(file,append,NULL,NULL);
+    return zipOpen2(pathname,append,NULL,NULL);
 }
 
 extern int ZEXPORT zipOpenNewFileInZip3 (file, filename, zipfi,
@@ -722,7 +716,6 @@ extern int ZEXPORT zipOpenNewFileInZip3 (file, filename, zipfi,
     uInt size_comment;
     uInt i;
     int err = ZIP_OK;
-    uLong version_to_extract;
 
 #    ifdef NOCRYPT
     if (password != NULL)
@@ -741,16 +734,6 @@ extern int ZEXPORT zipOpenNewFileInZip3 (file, filename, zipfi,
         err = zipCloseFileInZip (file);
         if (err != ZIP_OK)
             return err;
-    }
-
-    if (method == 0
-            && (level == 0 || (zi->flags & ZIP_WRITE_DATA_DESCRIPTOR) == 0))
-    {
-        version_to_extract = 10;
-    }
-    else
-    {
-        version_to_extract = 20;
     }
 
 
@@ -781,12 +764,8 @@ extern int ZEXPORT zipOpenNewFileInZip3 (file, filename, zipfi,
     if ((level==1))
       zi->ci.flag |= 6;
     if (password != NULL)
-    {
       zi->ci.flag |= 1;
-    }
-    if (version_to_extract >= 20
-            && (zi->flags & ZIP_WRITE_DATA_DESCRIPTOR) != 0)
-        zi->ci.flag |= 8;
+
     zi->ci.crc32 = 0;
     zi->ci.method = method;
     zi->ci.encrypt = 0;
@@ -801,7 +780,7 @@ extern int ZEXPORT zipOpenNewFileInZip3 (file, filename, zipfi,
     ziplocal_putValue_inmemory(zi->ci.central_header,(uLong)CENTRALHEADERMAGIC,4);
     /* version info */
     ziplocal_putValue_inmemory(zi->ci.central_header+4,(uLong)VERSIONMADEBY,2);
-    ziplocal_putValue_inmemory(zi->ci.central_header+6,(uLong)version_to_extract,2);
+    ziplocal_putValue_inmemory(zi->ci.central_header+6,(uLong)20,2);
     ziplocal_putValue_inmemory(zi->ci.central_header+8,(uLong)zi->ci.flag,2);
     ziplocal_putValue_inmemory(zi->ci.central_header+10,(uLong)zi->ci.method,2);
     ziplocal_putValue_inmemory(zi->ci.central_header+12,(uLong)zi->ci.dosDate,4);
@@ -842,7 +821,7 @@ extern int ZEXPORT zipOpenNewFileInZip3 (file, filename, zipfi,
     err = ziplocal_putValue(&zi->z_filefunc,zi->filestream,(uLong)LOCALHEADERMAGIC,4);
 
     if (err==ZIP_OK)
-        err = ziplocal_putValue(&zi->z_filefunc,zi->filestream,(uLong)version_to_extract,2);
+        err = ziplocal_putValue(&zi->z_filefunc,zi->filestream,(uLong)20,2);/* version needed to extract */
     if (err==ZIP_OK)
         err = ziplocal_putValue(&zi->z_filefunc,zi->filestream,(uLong)zi->ci.flag,2);
 
@@ -904,8 +883,6 @@ extern int ZEXPORT zipOpenNewFileInZip3 (file, filename, zipfi,
         zi->ci.encrypt = 1;
         zi->ci.pcrc_32_tab = get_crc_table();
         /*init_keys(password,zi->ci.keys,zi->ci.pcrc_32_tab);*/
-
-        crcForCrypting = (uLong)zi->ci.dosDate << 16; // ATTANTION! Without this row, you don't unpack your password protected archive in other app.
 
         sizeHead=crypthead(password,bufHead,RAND_HEAD_LEN,zi->ci.keys,zi->ci.pcrc_32_tab,crcForCrypting);
         zi->ci.crypt_header_size = sizeHead;
@@ -1123,7 +1100,7 @@ extern int ZEXPORT zipCloseFileInZipRaw (file, uncompressed_size, crc32)
 
     if (err==ZIP_OK)
     {
-        uLong cur_pos_inzip = ZTELL(zi->z_filefunc,zi->filestream);
+        long cur_pos_inzip = ZTELL(zi->z_filefunc,zi->filestream);
         if (ZSEEK(zi->z_filefunc,zi->filestream,
                   zi->ci.pos_local_header + 14,ZLIB_FILEFUNC_SEEK_SET)!=0)
             err = ZIP_ERRNO;
@@ -1140,23 +1117,6 @@ extern int ZEXPORT zipCloseFileInZipRaw (file, uncompressed_size, crc32)
         if (ZSEEK(zi->z_filefunc,zi->filestream,
                   cur_pos_inzip,ZLIB_FILEFUNC_SEEK_SET)!=0)
             err = ZIP_ERRNO;
-
-        if ((zi->ci.flag & 8) != 0) {
-            /* Write local Descriptor after file data */
-            if (err==ZIP_OK)
-                err = ziplocal_putValue(&zi->z_filefunc,zi->filestream,(uLong)DESCRIPTORHEADERMAGIC,4);
-
-            if (err==ZIP_OK)
-                err = ziplocal_putValue(&zi->z_filefunc,zi->filestream,crc32,4); /* crc 32, unknown */
-
-            if (err==ZIP_OK) /* compressed size, unknown */
-                err = ziplocal_putValue(&zi->z_filefunc,zi->filestream,compressed_size,4);
-
-            if (err==ZIP_OK) /* uncompressed size, unknown */
-                err = ziplocal_putValue(&zi->z_filefunc,zi->filestream,uncompressed_size,4);
-        }
-
-
     }
 
     zi->number_entry ++;
@@ -1257,24 +1217,4 @@ extern int ZEXPORT zipClose (file, global_comment)
     TRYFREE(zi);
 
     return err;
-}
-
-extern int ZEXPORT zipSetFlags(zipFile file, unsigned flags)
-{
-    zip_internal* zi;
-    if (file == NULL)
-        return ZIP_PARAMERROR;
-    zi = (zip_internal*)file;
-    zi->flags |= flags;
-    return ZIP_OK;
-}
-
-extern int ZEXPORT zipClearFlags(zipFile file, unsigned flags)
-{
-    zip_internal* zi;
-    if (file == NULL)
-        return ZIP_PARAMERROR;
-    zi = (zip_internal*)file;
-    zi->flags &= ~flags;
-    return ZIP_OK;
 }
