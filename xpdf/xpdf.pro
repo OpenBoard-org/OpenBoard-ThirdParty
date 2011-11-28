@@ -126,4 +126,7 @@ SOURCES += $$XPDF_DIR/fofi/FoFiBase.cc \
            $$XPDF_DIR/xpdf/TextOutputDev.cc \
            $$XPDF_DIR/xpdf/UnicodeMap.cc \
            $$XPDF_DIR/xpdf/UnicodeTypeTable.cc \
-           $$XPDF_DIR/xpdf/XRef.cc
+           $$XPDF_DIR/xpdf/XRef.cc \
+           $$XPDF_DIR/splash/SplashT1Font.cc \
+           $$XPDF_DIR/splash/SplashT1FontEngine.cc \
+           $$XPDF_DIR/splash/SplashT1FontFile.cc

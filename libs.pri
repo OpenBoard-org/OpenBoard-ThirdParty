@@ -25,6 +25,8 @@ INCLUDEPATH += "$$XPDF_DIR"
 INCLUDEPATH += "$$XPDF_DIR/goo"
 INCLUDEPATH += "$$XPDF_DIR/splash"
 
+LIBS        += -lpaper -lt1
+
 win32 {
     LIBS        += "-L$$PWD/openssl/0.9.8i/lib/VC/static" "-llibeay32MD"
     INCLUDEPATH += "$$PWD/openssl/0.9.8i/include"
