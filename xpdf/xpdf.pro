@@ -1,5 +1,5 @@
 TEMPLATE  = lib
-CONFIG   += staticlib release create_prl
+CONFIG   += staticlib release
 
 XPDF_DIR = "xpdf-3.02"
 
@@ -11,6 +11,7 @@ unix {
         SUB_LIB = "linux"
     }
     linux-g++-64 {
+        CONFIG += create_prl
         SUB_LIB = "linux"
     }
 }
