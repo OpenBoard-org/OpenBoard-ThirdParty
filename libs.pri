@@ -6,6 +6,9 @@ linux-g++ {
 linux-g++-32 {
     SUB_LIB = "linux"
 }
+linux-g++-64 {
+    SUB_LIB = "linux"
+}
 
 macx {
     SUB_LIB = "macx"
@@ -29,8 +32,10 @@ INCLUDEPATH += "$$XPDF_DIR/splash"
 linux-g++ {
     LIBS        += -lpaper -lt1
 }
-
 linux-g++-32 {
+    LIBS        += -lpaper -lt1
+}
+linux-g++-64 {
     LIBS        += -lpaper -lt1
 }
 

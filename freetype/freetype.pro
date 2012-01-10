@@ -2,11 +2,18 @@ TEMPLATE  = lib
 CONFIG   += staticlib release
 
 FREETYPE_DIR_WITH_VERSION = freetype-2.4.4
-
-linux-g++ {
-    SUB_LIB = "linux"
+unix {
+    linux-g++ {
+        SUB_LIB = "linux"
+    }
+    linux-g++-32 {
+        SUB_LIB = "linux"
+    }
+    linux-g++-64 {
+        CONFIG += create_prl
+        SUB_LIB = "linux"
+    }
 }
-
 macx {
     SUB_LIB = "macx"
 }

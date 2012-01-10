@@ -1,10 +1,19 @@
 TEMPLATE  = lib
-CONFIG   += staticlib release 
+CONFIG   += staticlib release
 
 XPDF_DIR = "xpdf-3.02"
 
-linux-g++ {
-     SUB_LIB = "linux"
+unix {
+    linux-g++ {
+        SUB_LIB = "linux"
+    }
+    linux-g++-32 {
+        SUB_LIB = "linux"
+    }
+    linux-g++-64 {
+        CONFIG += create_prl
+        SUB_LIB = "linux"
+    }
 }
 
 macx {
@@ -14,6 +23,7 @@ macx {
 win32 {
     SUB_LIB = "win32"
 }
+
 
 DESTDIR = "lib/$$SUB_LIB"
 
