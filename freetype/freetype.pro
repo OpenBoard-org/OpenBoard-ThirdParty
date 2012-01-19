@@ -1,7 +1,7 @@
 TEMPLATE  = lib
 CONFIG   += staticlib release
 
-FREETYPE_DIR_WITH_VERSION = freetype-2.4.4
+FREETYPE_DIR_WITH_VERSION = freetype-2.4.6
 unix {
     linux-g++ {
         SUB_LIB = "linux"
