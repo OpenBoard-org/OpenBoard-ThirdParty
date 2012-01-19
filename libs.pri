@@ -50,11 +50,6 @@ win32 {
     LIBS        += "-L$$PWD/microsoft/lib" "-lWinspool"
     LIBS        += "-L$$PWD/microsoft/lib" "-lshell32"
 
-    LIBS        += "-L$$PWD/fleetwood/reply2005/lib" "-lreply2005"
-    INCLUDEPATH += "$$PWD/fleetwood/reply2005/include"
-
-    LIBS        += "-L$$PWD/fleetwood/replyWRS970/lib" "-lreplyWRS970"
-    INCLUDEPATH += "$$PWD/fleetwood/replyWRS970/include"
 
 }
 
