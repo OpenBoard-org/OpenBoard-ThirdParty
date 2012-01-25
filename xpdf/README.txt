@@ -15,6 +15,9 @@ Windows:
 OSX:
     - cd xpdf-3.02
     - ./configure --with-freetype2-library="../../freetype/lib/macx" --with-freetype2-includes="../../freetype/freetype-2.4.4/include"
+    - If "can't find freetype" message appeared at compile output edit aconf.h by replacing
+	"/* #undef HAVE_FREETYPE_FREETYPE_H */" with "#define HAVE_FREETYPE_FREETYPE_H 1" and
+	"/* #undef HAVE_SPLASH */"              with "#define HAVE_SPLASH 1"
     - cd ..
     - qmake xpdf.pro -spec macx-g++
     - make
