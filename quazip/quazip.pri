@@ -1,14 +1,14 @@
+INCLUDEPATH  += "$$PWD/../zlib/1.2.3/include" \
+                "$$PWD/quazip-0.3
 
-INCLUDEPATH  += "$$PWD/../zlib/1.2.3/include"
-
-HEADERS += crypt.h \
-           ioapi.h \
-           quazip.h \
-           quazipfile.h \
-           quazipfileinfo.h \
-           quazipnewinfo.h \
-           unzip.h \
-           zip.h \
+HEADERS += quazip-0.3/crypt.h \
+           quazip-0.3/ioapi.h \
+           quazip-0.3/quazip.h \
+           quazip-0.3/quazipfile.h \
+           quazip-0.3/quazipfileinfo.h \
+           quazip-0.3/quazipnewinfo.h \
+           quazip-0.3/unzip.h \
+           quazip-0.3/zip.h \
            "../zlib/1.2.3/include/zlib.h"
 
 macx {
