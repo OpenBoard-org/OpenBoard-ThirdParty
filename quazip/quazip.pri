@@ -8,14 +8,9 @@ HEADERS += crypt.h \
            quazipfileinfo.h \
            quazipnewinfo.h \
            unzip.h \
-           zip.h
+           zip.h \
+           "../zlib/1.2.3/include/zlib.h"
 
-SOURCES += ioapi.c \
-           quazip.cpp \
-           quazipfile.cpp \
-           quazipnewinfo.cpp \
-           unzip.c \
-           zip.c
 macx {
    LIBS += -lz
 }

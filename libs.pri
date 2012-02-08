@@ -22,8 +22,11 @@ FREETYPE_DIR = "$PWD/freetype/freetype-2.4.6"
 LIBS        += "-L$$PWD/freetype/lib/$$SUB_LIB" "-lfreetype"
 # no INCLUDEPATH, freetype is not used directly
 
-XPDF_DIR     = "$$PWD/xpdf/xpdf-3.03"
+QUAZIP_DIR   = "$$PWD/quazip"
+LIBS        += "-L$$QUAZIP_DIR/lib" "-lquazip"
+INCLUDEPATH += "$$PWD/zlib/1.2.3/include"
 LIBS        += "-L$$PWD/xpdf/lib/$$SUB_LIB" "-lxpdf"
+XPDF_DIR     = "$$PWD/xpdf/xpdf-3.03"
 INCLUDEPATH += "$$XPDF_DIR"
 INCLUDEPATH += "$$XPDF_DIR/goo"
 INCLUDEPATH += "$$XPDF_DIR/splash"
