@@ -23,7 +23,7 @@ LIBS        += "-L$$PWD/freetype/lib/$$SUB_LIB" "-lfreetype"
 # no INCLUDEPATH, freetype is not used directly
 
 QUAZIP_DIR   = "$$PWD/quazip"
-LIBS        += "-L$$QUAZIP_DIR/lib" "-lquazip"
+LIBS        += "-L$$QUAZIP_DIR/lib/$$SUB_LIB" "-lquazip"
 INCLUDEPATH += "$$PWD/zlib/1.2.3/include"
 LIBS        += "-L$$PWD/xpdf/lib/$$SUB_LIB" "-lxpdf"
 XPDF_DIR     = "$$PWD/xpdf/xpdf-3.03"
