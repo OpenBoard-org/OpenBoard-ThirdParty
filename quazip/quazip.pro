@@ -1,8 +1,30 @@
 TEMPLATE = lib
 CONFIG  += staticlib release
-DESTDIR = "lib"
 
 QUAZIP_SRC_PATH = "quazip-0.3"
+
+unix {
+    linux-g++ {
+        SUB_LIB = "linux"
+    }
+    linux-g++-32 {
+        SUB_LIB = "linux"
+    }
+    linux-g++-64 {
+        CONFIG += create_prl
+        SUB_LIB = "linux"
+    }
+}
+macx {
+    SUB_LIB = "macx"
+}
+
+win32 {
+    SUB_LIB = "win32"
+}
+
+DESTDIR = "lib/$$SUB_LIB"
+OBJECTS_DIR  = "objects"
 
 DEPENDPATH  += . 
 INCLUDEPATH += . \
