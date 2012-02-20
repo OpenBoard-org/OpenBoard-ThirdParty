@@ -1,5 +1,5 @@
 INCLUDEPATH  += "$$PWD/../zlib/1.2.3/include" \
-                "$$PWD/quazip-0.3
+                "$$PWD/quazip-0.3"
 
 HEADERS += quazip-0.3/crypt.h \
            quazip-0.3/ioapi.h \
