@@ -17,6 +17,8 @@ unix {
 }
 macx {
     SUB_LIB = "macx"
+    CONFIG += x86
+    QMAKE_MACOSX_DEPLOYMENT_TARGET = "10.5"
 }
 
 win32 {

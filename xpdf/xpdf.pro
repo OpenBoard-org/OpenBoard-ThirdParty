@@ -30,7 +30,7 @@ DESTDIR = "lib/$$SUB_LIB"
 OBJECTS_DIR  = "objects"
 
 macx {
-    CONFIG += x86 ppc
+    CONFIG += x86
     QMAKE_MACOSX_DEPLOYMENT_TARGET = "10.5"
 }
 
