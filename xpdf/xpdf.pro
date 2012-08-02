@@ -5,9 +5,11 @@ XPDF_DIR = "xpdf-3.03"
 
 unix {
     linux-g++ {
+        CONFIG += create_prl
         SUB_LIB = "linux"
     }
     linux-g++-32 {
+        CONFIG += create_prl
         SUB_LIB = "linux"
     }
     linux-g++-64 {

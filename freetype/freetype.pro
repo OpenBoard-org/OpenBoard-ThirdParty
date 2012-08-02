@@ -4,9 +4,11 @@ CONFIG   += staticlib release
 FREETYPE_DIR_WITH_VERSION = freetype-2.4.6
 unix {
     linux-g++ {
+        CONFIG += create_prl
         SUB_LIB = "linux"
     }
     linux-g++-32 {
+        CONFIG += create_prl
         SUB_LIB = "linux"
     }
     linux-g++-64 {
