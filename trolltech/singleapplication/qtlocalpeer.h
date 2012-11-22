@@ -43,6 +43,7 @@
 #include <QtNetwork/QLocalServer>
 #include <QtNetwork/QLocalSocket>
 #include <QtCore/QDir>
+#include <unistd.h>
 
 #include "qtlockedfile.h"
 
