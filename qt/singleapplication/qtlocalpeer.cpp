@@ -46,8 +46,6 @@ static PProcessIdToSessionId pProcessIdToSessionId = 0;
 #include <unistd.h>
 #endif
 
-namespace SharedTools {
-
 static const char ack[] = "ack";
 
 QString QtLocalPeer::appSessionId(const QString &appId)
@@ -179,5 +177,3 @@ void QtLocalPeer::receiveConnection()
     socket->waitForBytesWritten(1000);
     emit messageReceived(message, socket); // ##(might take a long time to return)
 }
-
-} // namespace SharedTools

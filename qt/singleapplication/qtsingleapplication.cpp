@@ -38,7 +38,6 @@
 #include <QSharedMemory>
 #include <QWidget>
 
-namespace SharedTools {
 
 static const int instancesSize = 1024;
 
@@ -190,5 +189,3 @@ void QtSingleApplication::activateWindow()
         actWin->activateWindow();
     }
 }
-
-} // namespace SharedTools

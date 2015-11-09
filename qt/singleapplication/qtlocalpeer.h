@@ -34,7 +34,6 @@
 #include <QLocalSocket>
 #include <QDir>
 
-namespace SharedTools {
 
 class QtLocalPeer : public QObject
 {
@@ -61,4 +60,3 @@ protected:
     QtLockedFile lockFile;
 };
 
-} // namespace SharedTools
