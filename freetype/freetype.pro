@@ -1,5 +1,6 @@
 TEMPLATE  = lib
-CONFIG   += staticlib release
+#CONFIG   += staticlib release
+CONFIG   += staticlib debug_and_release
 
 FREETYPE_DIR_WITH_VERSION = freetype-2.4.6
 unix {
