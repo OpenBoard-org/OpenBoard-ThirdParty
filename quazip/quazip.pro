@@ -1,5 +1,8 @@
 TEMPLATE = lib
-CONFIG  += staticlib release
+#CONFIG  += staticlib release
+CONFIG  += staticlib debug_and_release
+
+
 
 QUAZIP_SRC_PATH = "quazip-0.3"
 
@@ -23,6 +26,7 @@ macx {
 
 win32 {
     SUB_LIB = "win32"
+
 }
 
 DESTDIR = "lib/$$SUB_LIB"
