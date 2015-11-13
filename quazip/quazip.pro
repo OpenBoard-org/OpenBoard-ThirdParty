@@ -1,5 +1,4 @@
 TEMPLATE = lib
-#CONFIG  += staticlib release
 CONFIG  += staticlib debug_and_release
 
 
