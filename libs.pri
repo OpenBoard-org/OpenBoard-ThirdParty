@@ -43,8 +43,11 @@ linux-g++-64 {
 }
 
 win32 {
-    LIBS        += "-L$$PWD/openssl/0.9.8i/lib/VC/static" "-llibeay32MD"
-    INCLUDEPATH += "$$PWD/openssl/0.9.8i/include"
+    #LIBS        += "-L$$PWD/openssl/0.9.8i/lib/VC/static" "-llibeay32MD"
+    #INCLUDEPATH += "$$PWD/openssl/0.9.8i/include"
+
+    LIBS        += "-L$$PWD/openssl/openssl-1.0.2-win32/lib/static" "-llibeay32MT"
+    INCLUDEPATH += "$$PWD/openssl/openssl-1.0.2-win32/include/openssl"
 
     LIBS        += "-lWmvcore"
     LIBS        += "-lWinmm"
