@@ -4,7 +4,8 @@ CONFIG  += staticlib debug_and_release
 
 
 
-QUAZIP_SRC_PATH = "quazip-0.3"
+#QUAZIP_SRC_PATH = "quazip-0.3"
+QUAZIP_SRC_PATH = "quazip-0.7.1"
 
 unix {
     linux-g++ {
@@ -27,6 +28,9 @@ macx {
 win32 {
     SUB_LIB = "win32"
 
+    # workaround for qdatetime.h macro bug
+    #DEFINES += NOMINMAX
+
 }
 
 DESTDIR = "lib/$$SUB_LIB"
@@ -46,14 +50,26 @@ HEADERS += "$$PWD/../zlib/1.2.3/include/zlib.h" \
            $$QUAZIP_SRC_PATH/quazipfileinfo.h \
            $$QUAZIP_SRC_PATH/quazipnewinfo.h \
            $$QUAZIP_SRC_PATH/unzip.h \
-           $$QUAZIP_SRC_PATH/zip.h 
+           $$QUAZIP_SRC_PATH/zip.h \ 
+           $$QUAZIP_SRC_PATH/JlCompress.h \
+           $$QUAZIP_SRC_PATH/quaadler32.h \
+           $$QUAZIP_SRC_PATH/quachecksum32.h \
+           $$QUAZIP_SRC_PATH/quacrc32.h \
+           $$QUAZIP_SRC_PATH/quazip_global.h \
+           $$QUAZIP_SRC_PATH/quazipdir.h
 
 # Input 
 
-SOURCES += $$QUAZIP_SRC_PATH/ioapi.c \
-           $$QUAZIP_SRC_PATH/quazip.cpp \
+SOURCES += $$QUAZIP_SRC_PATH/quazip.cpp \
            $$QUAZIP_SRC_PATH/quazipfile.cpp \
            $$QUAZIP_SRC_PATH/quazipnewinfo.cpp\
            $$QUAZIP_SRC_PATH/unzip.c \
-           $$QUAZIP_SRC_PATH/zip.c
+           $$QUAZIP_SRC_PATH/zip.c \
+           $$QUAZIP_SRC_PATH/JlCompress.cpp \
+           $$QUAZIP_SRC_PATH/qioapi.cpp \
+           $$QUAZIP_SRC_PATH/quaadler32.cpp \
+           $$QUAZIP_SRC_PATH/quacrc32.cpp \
+           $$QUAZIP_SRC_PATH/quazipdir.cpp \
+           $$QUAZIP_SRC_PATH/quazipfileinfo.cpp \
+
 
