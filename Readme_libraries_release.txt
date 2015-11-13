@@ -3,8 +3,7 @@
 
 		*************************************
 		* 				    *
-		*     Last Update release 	    *
-		*  OpenBoard-ThirdParty libraries   *
+		* Last Update release libraries	    *
 		*				    *
 		*				    *
 		*************************************
