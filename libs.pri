@@ -47,7 +47,7 @@ win32 {
     #INCLUDEPATH += "$$PWD/openssl/0.9.8i/include"
 
     LIBS        += "-L$$PWD/openssl/openssl-1.0.2-win32/lib/static" "-llibeay32MT"
-    INCLUDEPATH += "$$PWD/openssl/openssl-1.0.2-win32/include/openssl"
+    INCLUDEPATH += "$$PWD/openssl/openssl-1.0.2-win32/include"
 
     LIBS        += "-lWmvcore"
     LIBS        += "-lWinmm"
