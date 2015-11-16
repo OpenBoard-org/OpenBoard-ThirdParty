@@ -1,7 +1,9 @@
 TEMPLATE = lib
 CONFIG  += staticlib debug_and_release
 
-
+# You'll need to define this one manually if using a build system other
+# than qmake or using QuaZIP sources directly in your project.
+DEFINES += QUAZIP_STATIC
 
 #QUAZIP_SRC_PATH = "quazip-0.3"
 QUAZIP_SRC_PATH = "quazip-0.7.1"
@@ -28,7 +30,7 @@ win32 {
     SUB_LIB = "win32"
 
     # workaround for qdatetime.h macro bug
-    #DEFINES += NOMINMAX
+    DEFINES += NOMINMAX
 
 }
 
