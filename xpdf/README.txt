@@ -1,14 +1,14 @@
 How to build xpdf
 =================
 
-instructions for version 3.03
+instructions for version 3.04
 
 - Make sure freetype2 is installed in Uniboard/thirdparty/freetype
-- Decompress xpdf-3.03.xx.tar.gz
+- Decompress xpdf-3.04.xx.tar.gz
 
 Windows:
-	- copy xpdf-3.03/aconf-win32.h into xpdf-3.03/aconf.h
-	- edit xpdf-3.03/aconf.h, add this line "#undef UNICODE"
+	- copy xpdf-3.04/aconf-win32.h into xpdf-3.04/aconf.h
+	- edit xpdf-3.04/aconf.h, add this line "#undef UNICODE"
 	- qmake
 	- nmake
 
