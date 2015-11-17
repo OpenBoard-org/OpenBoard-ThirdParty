@@ -1,6 +1,7 @@
 TEMPLATE  = lib
 CONFIG   += staticlib debug_and_release
 
+#last release lib
 XPDF_DIR = "xpdf-3.04"
 
 unix {
