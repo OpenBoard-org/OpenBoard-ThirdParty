@@ -1,7 +1,9 @@
 TEMPLATE  = lib
-CONFIG   += staticlib release
+#CONFIG   += staticlib release
+CONFIG   += staticlib debug_and_release
 
-XPDF_DIR = "xpdf-3.03"
+#XPDF_DIR = "xpdf-3.03"
+XPDF_DIR = "xpdf-3.04"
 
 unix {
     linux-g++ {
@@ -37,11 +39,13 @@ macx {
 }
 
 # Free type includes and lib
-FREETYPE_DIR = "../freetype/freetype-2.4.6"
+#FREETYPE_DIR = "../freetype/freetype-2.4.6"
+FREETYPE_DIR = "../freetype/freetype-2.6.1"
+
 INCLUDEPATH += "$$FREETYPE_DIR/include" "$$FREETYPE_DIR/include/freetype2"
 LIBS        += "-L../freetype/lib/$$SUB_LIB" "-lfreetype"
 
-INCLUDEPATH += $$XPDF_DIR "$$XPDF_DIR/fofi" "$$XPDF_DIR/goo" "$$XPDF_DIR/splash" "$$XPDF_DIR/include" "xpdf-3.03Extra"
+INCLUDEPATH += $$XPDF_DIR "$$XPDF_DIR/fofi" "$$XPDF_DIR/goo" "$$XPDF_DIR/splash" "$$XPDF_DIR/include" "xpdf-3.04Extra"
 
 aconf.path    = $$XPDF_DIR
 aconf.files = $$XPDF_DIR/aconf.h
@@ -64,6 +68,11 @@ headers.files = $$XPDF_DIR/goo/gmem.h \
                 $$XPDF_DIR/xpdf/PDFDoc.h \
                 $$XPDF_DIR/xpdf/SplashOutputDev.h \
                 $$XPDF_DIR/xpdf/Catalog.h \
+                $$XPDF_DIR/xpdf/Form.h\
+                $$XPDF_DIR/xpdf/AcroForm.h\
+                $$XPDF_DIR/xpdf/XFAForm.h\
+                $$XPDF_DIR/xpdf/Zoox.h\
+                $$XPDF_DIR/xpdf/TextString.h\
                 $$XPDF_DIR/xpdf/Page.h \
                 $$XPDF_DIR/xpdf/Stream.h \
                 $$XPDF_DIR/xpdf/XRef.h \
@@ -77,7 +86,7 @@ SOURCES += $$XPDF_DIR/fofi/FoFiBase.cc \
            $$XPDF_DIR/fofi/FoFiTrueType.cc \
            $$XPDF_DIR/fofi/FoFiType1.cc \
            $$XPDF_DIR/fofi/FoFiType1C.cc \
-		   $$XPDF_DIR/fofi/FoFiIdentifier.cc \
+           $$XPDF_DIR/fofi/FoFiIdentifier.cc \
            $$XPDF_DIR/goo/gfile.cc \
            $$XPDF_DIR/goo/GHash.cc \
            $$XPDF_DIR/goo/GList.cc \
@@ -104,6 +113,10 @@ SOURCES += $$XPDF_DIR/fofi/FoFiBase.cc \
            $$XPDF_DIR/xpdf/BuiltinFont.cc \
            $$XPDF_DIR/xpdf/BuiltinFontTables.cc \
            $$XPDF_DIR/xpdf/Catalog.cc \
+           $$XPDF_DIR/xpdf/Form.cc\
+           $$XPDF_DIR/xpdf/AcroForm.cc\
+           $$XPDF_DIR/xpdf/XFAForm.cc\
+           $$XPDF_DIR/xpdf/Zoox.cc\
            $$XPDF_DIR/xpdf/CharCodeToUnicode.cc \
            $$XPDF_DIR/xpdf/CMap.cc \
            $$XPDF_DIR/xpdf/CoreOutputDev.cc \
@@ -113,6 +126,7 @@ SOURCES += $$XPDF_DIR/fofi/FoFiBase.cc \
            $$XPDF_DIR/xpdf/FontEncodingTables.cc \
            $$XPDF_DIR/xpdf/Function.cc \
            $$XPDF_DIR/xpdf/Gfx.cc \
+           $$XPDF_DIR/xpdf/TextString.cc\
            $$XPDF_DIR/xpdf/GfxFont.cc \
            $$XPDF_DIR/xpdf/GfxState.cc \
            $$XPDF_DIR/xpdf/GlobalParams.cc \
