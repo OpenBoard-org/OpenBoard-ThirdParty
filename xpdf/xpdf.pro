@@ -1,8 +1,15 @@
 TEMPLATE  = lib
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG   += staticlib debug_and_release
 
 #last release lib
+=======
+#CONFIG   += staticlib release
+CONFIG   += staticlib debug_and_release
+
+#XPDF_DIR = "xpdf-3.03"
+>>>>>>> 48da6780be898327f6e1879bba99913b68b2e923
 =======
 #CONFIG   += staticlib release
 CONFIG   += staticlib debug_and_release
@@ -46,6 +53,10 @@ macx {
 
 # Free type includes and lib
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#FREETYPE_DIR = "../freetype/freetype-2.4.6"
+>>>>>>> 48da6780be898327f6e1879bba99913b68b2e923
 =======
 #FREETYPE_DIR = "../freetype/freetype-2.4.6"
 >>>>>>> 48da6780be898327f6e1879bba99913b68b2e923
