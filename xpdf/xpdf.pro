@@ -32,13 +32,11 @@ DESTDIR = "lib/$$SUB_LIB"
 OBJECTS_DIR  = "objects"
 
 macx {
-    CONFIG += x86
-    QMAKE_MACOSX_DEPLOYMENT_TARGET = "10.5"
+    CONFIG += x86_64
+    QMAKE_MACOSX_DEPLOYMENT_TARGET = "10.10"
 }
 
 # Free type includes and lib
-#FREETYPE_DIR = "../freetype/freetype-2.4.6"
-#FREETYPE_DIR = "../freetype/freetype-2.4.6"
 FREETYPE_DIR = "../freetype/freetype-2.6.1"
 
 INCLUDEPATH += "$$FREETYPE_DIR/include" "$$FREETYPE_DIR/include/freetype2"

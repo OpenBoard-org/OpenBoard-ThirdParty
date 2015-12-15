@@ -13,7 +13,6 @@ HEADERS += \
     $$PWD/quazip-0.7.1/quazipnewinfo.h \
     $$PWD/quazip-0.7.1/unzip.h \
     $$PWD/quazip-0.7.1/zip.h \
-    # $$PWD/../zlib/1.2.3/include/zlib.h
     $$PWD/../zlib/1.2.8/include/zlib.h
 
 

@@ -5,7 +5,6 @@ CONFIG  += staticlib debug_and_release
 # than qmake or using QuaZIP sources directly in your project.
 DEFINES += QUAZIP_STATIC
 
-#QUAZIP_SRC_PATH = "quazip-0.3"
 QUAZIP_SRC_PATH = "quazip-0.7.1"
 
 unix {
@@ -22,8 +21,8 @@ unix {
 }
 macx {
     SUB_LIB = "macx"
-    CONFIG += x86
-    QMAKE_MACOSX_DEPLOYMENT_TARGET = "10.5"
+    CONFIG += x86_64
+    QMAKE_MACOSX_DEPLOYMENT_TARGET = "10.10"
 }
 
 win32 {
@@ -39,11 +38,11 @@ OBJECTS_DIR  = "objects"
 
 DEPENDPATH  += . 
 INCLUDEPATH += . \
-               "$$PWD/../zlib/1.2.3" \
-               "$$PWD/../zlib/1.2.3/include"
+               "$$PWD/../zlib/1.2.8" \
+               "$$PWD/../zlib/1.2.8/include"
 
 # Input
-HEADERS += "$$PWD/../zlib/1.2.3/include/zlib.h" \
+HEADERS += "$$PWD/../zlib/1.2.8/include/zlib.h" \
            $$QUAZIP_SRC_PATH/crypt.h \   
            $$QUAZIP_SRC_PATH/ioapi.h \
            $$QUAZIP_SRC_PATH/quazip.h \

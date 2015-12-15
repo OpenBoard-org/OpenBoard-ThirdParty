@@ -64,16 +64,13 @@ win32 {
 }
 
 macx {
-    LIBS         += "-framework QuickTime"
     LIBS         += "-framework QuartzCore"
     LIBS         += "-framework AudioToolbox"
     LIBS         += "-framework CoreAudio"
     LIBS         += "-framework ApplicationServices"
-    LIBS         += "-framework Carbon"
+    LIBS         += "-framework Cocoa"
             
     LIBS         += "-lcrypto"
-    LIBS         += "$$PWD/unsanity/ape/APELite.o"
-    INCLUDEPATH  += "$$PWD/unsanity/ape"
 }
 
 
