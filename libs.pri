@@ -45,22 +45,25 @@ linux-g++-64 {
 }
 
 win32 {
-    #LIBS        += "-L$$PWD/openssl/0.9.8i/lib/VC/static" "-llibeay32MD"
-    #INCLUDEPATH += "$$PWD/openssl/0.9.8i/include"
-
-    LIBS        += "-L$$PWD/openssl/openssl-1.0.2-win32/lib/static" "-llibeay32MT"
     INCLUDEPATH += "$$PWD/openssl/openssl-1.0.2-win32/include"
+    QMAKE_LIBDIR += "$$PWD/openssl/openssl-1.0.2-win32/lib/static"
 
-    LIBS        += "-lWmvcore"
+    debug {
+        LIBS += -llibeay32
+        LIBS += -lMsvcrtd
+    }
 
- Msvcrtd
-    LIBS        += "-lWinmm"
+    release {
+        LIBS += -llibeay32MT
+        LIBS += -lMsvcrt
+    }
+
+    LIBS += -lWmvcore
+    LIBS += -lWinmm
 	
 	# need those link if we want to change default printer and print usind shell command
     LIBS        += "-L$$PWD/microsoft/lib" "-lWinspool"
     LIBS        += "-L$$PWD/microsoft/lib" "-lshell32"
-
-
 }
 
 macx {
