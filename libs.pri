@@ -35,13 +35,13 @@ INCLUDEPATH += "$$XPDF_DIR/splash"
 
 
 linux-g++ {
-    LIBS        += -lpaper -lt1
+    LIBS        += -lpaper
 }
 linux-g++-32 {
-    LIBS        += -lpaper -lt1
+    LIBS        += -lpaper
 }
 linux-g++-64 {
-    LIBS        += -lpaper -lt1
+    LIBS        += -lpaper
 }
 
 win32 {
