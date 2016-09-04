@@ -15,7 +15,11 @@ macx {
 }
 
 win32 {
-    SUB_LIB = "win32"
+    CONFIG( debug, debug|release ) {
+        SUB_LIB = "win32/debug"
+    } else {
+        SUB_LIB = "win32/release"
+    }
 }
 
 FREETYPE_DIR = "$PWD/freetype/freetype-2.6.1"
