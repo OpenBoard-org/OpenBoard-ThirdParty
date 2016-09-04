@@ -48,12 +48,10 @@ win32 {
     INCLUDEPATH += "$$PWD/openssl/openssl-1.0.2-win32/include"
     QMAKE_LIBDIR += "$$PWD/openssl/openssl-1.0.2-win32/lib/static"
 
-    debug {
+    CONFIG( debug, debug|release ) {
         LIBS += -llibeay32
         LIBS += -lMsvcrtd
-    }
-
-    release {
+    } else {
         LIBS += -llibeay32MT
         LIBS += -lMsvcrt
     }
