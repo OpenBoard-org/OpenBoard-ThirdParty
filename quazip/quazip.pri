@@ -1,21 +1,29 @@
-INCLUDEPATH  += "$$PWD/../zlib/1.2.3/include" \
-                "$$PWD/quazip-0.3"
+INCLUDEPATH  += "$$PWD/../zlib/1.2.8/include" \
+                "$$PWD/quazip-0.7.1"
 
-HEADERS += quazip-0.3/crypt.h \
-           quazip-0.3/ioapi.h \
-           quazip-0.3/quazip.h \
-           quazip-0.3/quazipfile.h \
-           quazip-0.3/quazipfileinfo.h \
-           quazip-0.3/quazipnewinfo.h \
-           quazip-0.3/unzip.h \
-           quazip-0.3/zip.h \
-           "../zlib/1.2.3/include/zlib.h"
+DEFINES += QUAZIP_STATIC
+
+HEADERS += \
+    $$PWD/quazip-0.7.1/crypt.h \
+    $$PWD/quazip-0.7.1/quazip_global.h \
+    $$PWD/quazip-0.7.1/ioapi.h \
+    $$PWD/quazip-0.7.1/quazip.h \
+    $$PWD/quazip-0.7.1/quazipfile.h \
+    $$PWD/quazip-0.7.1/quazipfileinfo.h \
+    $$PWD/quazip-0.7.1/quazipnewinfo.h \
+    $$PWD/quazip-0.7.1/unzip.h \
+    $$PWD/quazip-0.7.1/zip.h \
+    $$PWD/../zlib/1.2.8/include/zlib.h
+
+
+
 
 macx {
    LIBS += -lz
 }
 win32 {
-   LIBS     += "-L$$PWD/../zlib/1.2.3/lib" "-lzlib"
+   LIBS     += "-L$$PWD/../zlib/1.2.8/lib" "-lzlib"
+
 }
 linux-g++ {
    LIBS += -lz

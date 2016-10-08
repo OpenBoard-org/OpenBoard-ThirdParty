@@ -1,7 +1,11 @@
 TEMPLATE = lib
-CONFIG  += staticlib release
+CONFIG  += staticlib debug_and_release
 
-QUAZIP_SRC_PATH = "quazip-0.3"
+# You'll need to define this one manually if using a build system other
+# than qmake or using QuaZIP sources directly in your project.
+DEFINES += QUAZIP_STATIC
+
+QUAZIP_SRC_PATH = "quazip-0.7.1"
 
 unix {
     linux-g++ {
@@ -17,12 +21,20 @@ unix {
 }
 macx {
     SUB_LIB = "macx"
-    CONFIG += x86
-    QMAKE_MACOSX_DEPLOYMENT_TARGET = "10.5"
+    CONFIG += x86_64
+    QMAKE_MACOSX_DEPLOYMENT_TARGET = "10.10"
 }
 
 win32 {
-    SUB_LIB = "win32"
+    CONFIG( debug, debug|release ) {
+        SUB_LIB = "win32/debug"
+    } else {
+        SUB_LIB = "win32/release"
+    }
+
+    # workaround for qdatetime.h macro bug
+    DEFINES += NOMINMAX
+
 }
 
 DESTDIR = "lib/$$SUB_LIB"
@@ -30,11 +42,11 @@ OBJECTS_DIR  = "objects"
 
 DEPENDPATH  += . 
 INCLUDEPATH += . \
-               "$$PWD/../zlib/1.2.3" \
-               "$$PWD/../zlib/1.2.3/include"
+               "$$PWD/../zlib/1.2.8" \
+               "$$PWD/../zlib/1.2.8/include"
 
 # Input
-HEADERS += "$$PWD/../zlib/1.2.3/include/zlib.h" \
+HEADERS += "$$PWD/../zlib/1.2.8/include/zlib.h" \
            $$QUAZIP_SRC_PATH/crypt.h \   
            $$QUAZIP_SRC_PATH/ioapi.h \
            $$QUAZIP_SRC_PATH/quazip.h \
@@ -42,14 +54,26 @@ HEADERS += "$$PWD/../zlib/1.2.3/include/zlib.h" \
            $$QUAZIP_SRC_PATH/quazipfileinfo.h \
            $$QUAZIP_SRC_PATH/quazipnewinfo.h \
            $$QUAZIP_SRC_PATH/unzip.h \
-           $$QUAZIP_SRC_PATH/zip.h 
+           $$QUAZIP_SRC_PATH/zip.h \ 
+           $$QUAZIP_SRC_PATH/JlCompress.h \
+           $$QUAZIP_SRC_PATH/quaadler32.h \
+           $$QUAZIP_SRC_PATH/quachecksum32.h \
+           $$QUAZIP_SRC_PATH/quacrc32.h \
+           $$QUAZIP_SRC_PATH/quazip_global.h \
+           $$QUAZIP_SRC_PATH/quazipdir.h
 
 # Input 
 
-SOURCES += $$QUAZIP_SRC_PATH/ioapi.c \
-           $$QUAZIP_SRC_PATH/quazip.cpp \
+SOURCES += $$QUAZIP_SRC_PATH/quazip.cpp \
            $$QUAZIP_SRC_PATH/quazipfile.cpp \
            $$QUAZIP_SRC_PATH/quazipnewinfo.cpp\
            $$QUAZIP_SRC_PATH/unzip.c \
-           $$QUAZIP_SRC_PATH/zip.c
+           $$QUAZIP_SRC_PATH/zip.c \
+           $$QUAZIP_SRC_PATH/JlCompress.cpp \
+           $$QUAZIP_SRC_PATH/qioapi.cpp \
+           $$QUAZIP_SRC_PATH/quaadler32.cpp \
+           $$QUAZIP_SRC_PATH/quacrc32.cpp \
+           $$QUAZIP_SRC_PATH/quazipdir.cpp \
+           $$QUAZIP_SRC_PATH/quazipfileinfo.cpp \
+
 

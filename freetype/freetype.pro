@@ -1,7 +1,8 @@
 TEMPLATE  = lib
-CONFIG   += staticlib release
+CONFIG   += staticlib debug_and_release
 
-FREETYPE_DIR_WITH_VERSION = freetype-2.4.6
+FREETYPE_DIR_WITH_VERSION = freetype-2.6.1
+
 unix {
     linux-g++ {
         CONFIG += create_prl
@@ -21,7 +22,11 @@ macx {
 }
 
 win32 {
-    SUB_LIB = "win32"
+    CONFIG( debug, debug|release ) {
+        SUB_LIB = "win32/debug"
+    } else {
+        SUB_LIB = "win32/release"
+    }
 }
 
 DESTDIR = "lib/$$SUB_LIB"
@@ -31,7 +36,7 @@ macx {
     DEFINES += "FT_MACINTOSH"
 
     CONFIG += x86
-    QMAKE_MACOSX_DEPLOYMENT_TARGET = "10.5"
+    QMAKE_MACOSX_DEPLOYMENT_TARGET = "10.10"
 }
 
 INCLUDEPATH += "$$FREETYPE_DIR_WITH_VERSION/include"
