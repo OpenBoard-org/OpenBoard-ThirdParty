@@ -49,17 +49,11 @@ linux-g++-64 {
 }
 
 win32 {
-    INCLUDEPATH += "$$PWD/openssl/openssl-1.0.2-win32/include"
-    QMAKE_LIBDIR += "$$PWD/openssl/openssl-1.0.2-win32/lib/static"
+    INCLUDEPATH += "$$PWD/openssl/openssl-1.1.0-win32/include"
+    QMAKE_LIBDIR += "$$PWD/openssl/openssl-1.1.0-win32/lib"
 
-    CONFIG( debug, debug|release ) {
-        LIBS += -llibeay32
-        LIBS += -lMsvcrtd
-    } else {
-        LIBS += -llibeay32MT
-        LIBS += -lMsvcrt
-    }
-
+    LIBS += -llibssl
+    LIBS += -llibcrypto
     LIBS += -lWmvcore
     LIBS += -lWinmm
 	
