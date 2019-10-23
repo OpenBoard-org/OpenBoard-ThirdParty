@@ -22,21 +22,9 @@ win32 {
     }
 }
 
-FREETYPE_DIR = "$PWD/freetype/freetype-2.6.1"
-
-LIBS        += "-L$$PWD/freetype/lib/$$SUB_LIB" "-lfreetype"
-# no INCLUDEPATH, freetype is not used directly
-
 QUAZIP_DIR   = "$$PWD/quazip"
 LIBS        += "-L$$QUAZIP_DIR/lib/$$SUB_LIB" "-lquazip"
 INCLUDEPATH += "$$PWD/zlib/1.2.8/include"
-
-LIBS        += "-L$$PWD/xpdf/lib/$$SUB_LIB" "-lxpdf"
-XPDF_DIR     = "$$PWD/xpdf/xpdf-3.04"
-INCLUDEPATH += "$$XPDF_DIR"
-INCLUDEPATH += "$$XPDF_DIR/goo"
-INCLUDEPATH += "$$XPDF_DIR/splash"
-
 
 linux-g++ {
     LIBS        += -lpaper
@@ -46,6 +34,11 @@ linux-g++-32 {
 }
 linux-g++-64 {
     LIBS        += -lpaper
+}
+
+linux-g++ {
+    LIBS += -lpoppler
+    INCLUDEPATH += "/usr/include/poppler"
 }
 
 win32 {
