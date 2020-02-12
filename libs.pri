@@ -22,13 +22,6 @@ win32 {
     }
 }
 
-QUAZIP_DIR   = "$$PWD/quazip"
-LIBS        += "-L$$QUAZIP_DIR/lib/$$SUB_LIB" "-lquazip"
-INCLUDEPATH += "$$PWD/zlib/1.2.8/include"
-
-linux-g++ {
-    LIBS        += -lpaper
-}
 linux-g++-32 {
     LIBS        += -lpaper
 }
@@ -37,8 +30,13 @@ linux-g++-64 {
 }
 
 linux-g++ {
+    LIBS        += -lpaper
+
     LIBS += -lpoppler
     INCLUDEPATH += "/usr/include/poppler"
+
+    LIBS += -lquazip5
+    INCLUDEPATH += "/usr/include/quazip"
 }
 
 win32 {
