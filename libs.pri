@@ -40,11 +40,32 @@ linux-g++ {
 }
 
 win32 {
-    INCLUDEPATH += "$$PWD/openssl/openssl-1.1.0-win32/include"
-    QMAKE_LIBDIR += "$$PWD/openssl/openssl-1.1.0-win32/lib"
 
-    LIBS += -llibssl
-    LIBS += -llibcrypto
+    FREETYPE_DIR = "$PWD/freetype/freetype-2.6.1"
+
+    LIBS        += "-L$$PWD/freetype/lib/$$SUB_LIB" "-lfreetype"
+    # no INCLUDEPATH, freetype is not used directly
+
+    QUAZIP_DIR   = "$$PWD/quazip"
+    LIBS        += "-L$$QUAZIP_DIR/lib/$$SUB_LIB" "-lquazip"
+    INCLUDEPATH += "$$PWD/zlib/1.2.11/include"
+
+    LIBS        += "-L$$PWD/xpdf/lib/$$SUB_LIB" "-lxpdf"
+    XPDF_DIR     = "$$PWD/xpdf/xpdf-3.04"
+    INCLUDEPATH += "$$XPDF_DIR"
+    INCLUDEPATH += "$$XPDF_DIR/goo"
+    INCLUDEPATH += "$$XPDF_DIR/splash"
+
+    LIBS += -L$$PWD/../OpenBoard-ThirdParty/openssl/openssl-1.0.2-win64/lib/ -llibeay32
+    LIBS += -L$$PWD/../OpenBoard-ThirdParty/openssl/openssl-1.0.2-win64/lib/ -lssleay32
+    INCLUDEPATH += $$PWD/../OpenBoard-ThirdParty/openssl/openssl-1.0.2-win64/include
+    DEPENDPATH += $$PWD/../OpenBoard-ThirdParty/openssl/openssl-1.0.2-win64/include
+
+    LIBS += -L$$PWD/../OpenBoard-ThirdParty/ffmpeg/lib/ -lavformat -lavcodec -lswscale  -lswresample -lavutil -lfreetype
+
+    INCLUDEPATH += $$PWD/../OpenBoard-ThirdParty/ffmpeg/include
+    DEPENDPATH += $$PWD/../OpenBoard-ThirdParty/ffmpeg/include
+
     LIBS += -lWmvcore
     LIBS += -lWinmm
 	
