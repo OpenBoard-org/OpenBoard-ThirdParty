@@ -353,7 +353,7 @@ SysFontInfo *SysFontList::find(GString *name) {
 #ifdef _WIN32
 void SysFontList::scanWindowsFonts(char *winFontDir) {
   OSVERSIONINFO version;
-  char *path;
+  const char *path = NULL;
   DWORD idx, valNameLen, dataLen, type;
   HKEY regKey;
   char valName[1024], data[1024];
