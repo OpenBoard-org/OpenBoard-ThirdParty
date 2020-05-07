@@ -42,11 +42,11 @@ OBJECTS_DIR  = "objects"
 
 DEPENDPATH  += . 
 INCLUDEPATH += . \
-               "$$PWD/../zlib/1.2.8" \
-               "$$PWD/../zlib/1.2.8/include"
+               "$$PWD/../zlib/1.2.11" \
+               "$$PWD/../zlib/1.2.11/include"
 
 # Input
-HEADERS += "$$PWD/../zlib/1.2.8/include/zlib.h" \
+HEADERS += "$$PWD/../zlib/1.2.11/include/zlib.h" \
            $$QUAZIP_SRC_PATH/crypt.h \   
            $$QUAZIP_SRC_PATH/ioapi.h \
            $$QUAZIP_SRC_PATH/quazip.h \
