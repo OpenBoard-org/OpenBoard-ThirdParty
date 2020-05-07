@@ -6048,7 +6048,11 @@ void Splash::compositeBackground(SplashColorPtr color) {
     break;
 #endif
   }
-  memset(bitmap->alpha, 255, bitmap->width * bitmap->height);
+
+  if (bitmap->alpha) {
+    memset(bitmap->alpha, 255, bitmap->width * bitmap->height);
+  }
+
 }
 
 SplashError Splash::blitTransparent(SplashBitmap *src, int xSrc, int ySrc,
