@@ -14,14 +14,6 @@ macx {
     SUB_LIB = "macx"
 }
 
-win32 {
-    CONFIG( debug, debug|release ) {
-        SUB_LIB = "win32/debug"
-    } else {
-        SUB_LIB = "win32/release"
-    }
-}
-
 linux-g++-32 {
     LIBS        += -lpaper
 }
@@ -40,6 +32,13 @@ linux-g++ {
 }
 
 win32 {
+    CONFIG( debug, debug|release ) {
+        SUB_LIB = "win32/debug"
+    } else {
+        SUB_LIB = "win32/release"
+    }
+
+    DEFINES += USE_XPDF
 
     FREETYPE_DIR = "$PWD/freetype/freetype-2.6.1"
 
@@ -56,20 +55,16 @@ win32 {
     INCLUDEPATH += "$$XPDF_DIR/goo"
     INCLUDEPATH += "$$XPDF_DIR/splash"
 
-    LIBS += -L$$PWD/../OpenBoard-ThirdParty/openssl/openssl-1.0.2-win64/lib/ -llibeay32
-    LIBS += -L$$PWD/../OpenBoard-ThirdParty/openssl/openssl-1.0.2-win64/lib/ -lssleay32
-    INCLUDEPATH += $$PWD/../OpenBoard-ThirdParty/openssl/openssl-1.0.2-win64/include
-    DEPENDPATH += $$PWD/../OpenBoard-ThirdParty/openssl/openssl-1.0.2-win64/include
+    INCLUDEPATH += "$$PWD/openssl/openssl-1.1.0-win64/include"
+    QMAKE_LIBDIR += "$$PWD/openssl/openssl-1.1.0-win64/lib"
 
-    LIBS += -L$$PWD/../OpenBoard-ThirdParty/ffmpeg/lib/ -lavformat -lavcodec -lswscale  -lswresample -lavutil -lfreetype
-
-    INCLUDEPATH += $$PWD/../OpenBoard-ThirdParty/ffmpeg/include
-    DEPENDPATH += $$PWD/../OpenBoard-ThirdParty/ffmpeg/include
+    LIBS += -llibssl
+    LIBS += -llibcrypto
 
     LIBS += -lWmvcore
     LIBS += -lWinmm
-	
-	# need those link if we want to change default printer and print usind shell command
+
+    # need those link if we want to change default printer and print usind shell command
     LIBS        += "-L$$PWD/microsoft/lib" "-lWinspool"
     LIBS        += "-L$$PWD/microsoft/lib" "-lshell32"
 }
