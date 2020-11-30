@@ -38,7 +38,6 @@ win32 {
         SUB_LIB = "win32/release"
     }
 
-    DEFINES += USE_XPDF
 
     FREETYPE_DIR = "$PWD/freetype/freetype-2.6.1"
 
@@ -49,11 +48,25 @@ win32 {
     LIBS        += "-L$$QUAZIP_DIR/lib/$$SUB_LIB" "-lquazip"
     INCLUDEPATH += "$$PWD/zlib/1.2.11/include"
 
-    LIBS        += "-L$$PWD/xpdf/lib/$$SUB_LIB" "-lxpdf"
-    XPDF_DIR     = "$$PWD/xpdf/xpdf-3.04"
-    INCLUDEPATH += "$$XPDF_DIR"
-    INCLUDEPATH += "$$XPDF_DIR/goo"
-    INCLUDEPATH += "$$XPDF_DIR/splash"
+    DEFINES += USE_XPDF
+    contains (DEFINES, USE_XPDF) {
+        LIBS        += "-L$$PWD/xpdf/lib/$$SUB_LIB" "-lxpdf"
+        XPDF_DIR     = "$$PWD/xpdf/xpdf-3.04"
+        INCLUDEPATH += "$$XPDF_DIR"
+        INCLUDEPATH += "$$XPDF_DIR/goo"
+        INCLUDEPATH += "$$XPDF_DIR/splash"
+    } else {
+        CONFIG( debug, debug|release ) {
+            LIBS += "-L$$PWD/poppler/poppler-20.10.0/build/Debug" "-lpoppler"
+        } else {
+            LIBS += "-L$$PWD/poppler/poppler-20.10.0/build/Release" "-lpoppler"
+        }
+        INCLUDEPATH += "$$PWD/poppler/poppler-20.10.0"
+        # For 'poppler_config.h"
+        INCLUDEPATH += "$$PWD/poppler/poppler-20.10.0/build/poppler"
+        # For "poppler-version.h"
+        INCLUDEPATH += "$$PWD/poppler/poppler-20.10.0/cpp"
+    }
 
     INCLUDEPATH += "$$PWD/openssl/openssl-1.1.0-win64/include"
     QMAKE_LIBDIR += "$$PWD/openssl/openssl-1.1.0-win64/lib"
