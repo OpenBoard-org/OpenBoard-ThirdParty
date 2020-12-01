@@ -11,7 +11,7 @@ win32 {
 }
 
 macx {
-    DEFINES += QPDF_DEBUG_BIN_DIR=\\\"\\\"
+    DEFINES += QPDF_DEBUG_BIN_DIR=\\\"$$PWD/qpdf-10.0.4/bin_mac\\\"
     DEFINES += QPDF_BINARY=\\\"qpdf\\\"
 }
 
