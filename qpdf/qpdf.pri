@@ -22,12 +22,11 @@ macx {
     DEFINES += OB_USE_QPDF_AS_LIB
 
     # qpdf
-    LIBS += "-L$$PWD/qpdf/qpdf-10.0.4/windows/lib" "-lqpdf"
-    INCLUDEPATH += "$$PWD/qpdf/qpdf-10.0.4/windows/include"
+    LIBS += "-L/usr/local/Cellar/qpdf/10.0.4/lib" "-lqpdf"
+    INCLUDEPATH += "/usr/local/Cellar/qpdf/10.0.4/include"
 
-    # libjpeg, required by qpdf
-    LIBS += "-L$$PWD/libjpeg-turbo/2.0.6/windows/lib" "-ljpeg-static"
-    INCLUDEPATH += "$$PWD/libjpeg-turbo/2.0.6/windows/include"
+    # libjpeg header, only required by "qpdf.cc"
+    INCLUDEPATH += "/usr/local/Cellar/jpeg/9d/include"
 }
 
 linux-g++* {
