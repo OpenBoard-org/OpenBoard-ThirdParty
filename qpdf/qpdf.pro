@@ -50,6 +50,11 @@ win32 {
 
     # Lib JPEG requirement
     INCLUDEPATH += "$$PWD/../libjpeg-turbo/2.0.6/windows/include"
+
+    # Lib zlib requirement
+    INCLUDEPATH += "$$PWD/../zlib/1.2.11/include"
+
+    DEFINES += USE_CRYPTO_OPENSSL
 }
 
 DESTDIR = "lib/$$SUB_LIB"
@@ -161,4 +166,5 @@ SRCS_libqpdf = \
 INCLUDEPATH += $$QPDF_DIR/libqpdf \
                $$QPDF_DIR/include
 SOURCES += $$CRYPTO_OPENSSL \
-           $$SRCS_libqpdf
+           $$SRCS_libqpdf \
+           qpdf-10.0.4/src/libqpdf/msvc_compatibility.cpp

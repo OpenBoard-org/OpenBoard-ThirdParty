@@ -538,9 +538,9 @@ QUtil::same_file(char const* name1, char const* name2)
 #ifdef _WIN32
     bool same = false;
 # ifndef AVOID_WINDOWS_HANDLE
-    HANDLE fh1 = CreateFile(name1, GENERIC_READ, FILE_SHARE_READ,
+    HANDLE fh1 = CreateFileA(name1, GENERIC_READ, FILE_SHARE_READ,
                             NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-    HANDLE fh2 = CreateFile(name2, GENERIC_READ, FILE_SHARE_READ,
+    HANDLE fh2 = CreateFileA(name2, GENERIC_READ, FILE_SHARE_READ,
                             NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
     BY_HANDLE_FILE_INFORMATION fi1;
     BY_HANDLE_FILE_INFORMATION fi2;
@@ -736,7 +736,7 @@ QUtil::get_env(std::string const& var, std::string* value)
     return false;
 # else
     // first get the size of the buffer
-    DWORD len = ::GetEnvironmentVariable(var.c_str(), NULL, 0);
+    DWORD len = ::GetEnvironmentVariableA(var.c_str(), NULL, 0);
     if (len == 0)
     {
         // this means that there is no such variable
@@ -746,7 +746,7 @@ QUtil::get_env(std::string const& var, std::string* value)
     if (value)
     {
 	PointerHolder<char> t = PointerHolder<char>(true, new char[len + 1]);
-        ::GetEnvironmentVariable(var.c_str(), t.getPointer(), len);
+        ::GetEnvironmentVariableA(var.c_str(), t.getPointer(), len);
 	*value = t.getPointer();
     }
 

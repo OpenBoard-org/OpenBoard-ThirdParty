@@ -92,7 +92,7 @@
 /* #undef USE_CRYPTO_GNUTLS */
 
 /* Whether to use the native crypto provider */
-#define USE_CRYPTO_NATIVE 1
+/* #define USE_CRYPTO_NATIVE 1 */
 
 /* Whether to use the openssl crypto provider */
 #define USE_CRYPTO_OPENSSL 1

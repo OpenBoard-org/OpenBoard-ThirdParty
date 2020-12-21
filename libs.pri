@@ -68,6 +68,13 @@ win32 {
         INCLUDEPATH += "$$PWD/poppler/poppler-20.10.0/cpp"
     }
 
+    # QPDF
+    LIBS += "-L$$PWD/qpdf/lib/$$SUB_LIB" "-lqpdf"
+    LIBS += "-L$$PWD/libjpeg-turbo/2.0.6/windows/lib" "-ljpeg-static"
+    DEFINES += USE_CRYPTO_OPENSSL
+    INCLUDEPATH += "$$PWD/qpdf/qpdf-10.0.4/windows/include"
+    INCLUDEPATH += "$$PWD/libjpeg-turbo/2.0.6/windows/include"
+
     INCLUDEPATH += "$$PWD/openssl/openssl-1.1.0-win64/include"
     QMAKE_LIBDIR += "$$PWD/openssl/openssl-1.1.0-win64/lib"
 
