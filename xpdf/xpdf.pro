@@ -20,6 +20,9 @@ unix {
 
 macx {
     SUB_LIB = "macx"
+
+    CONFIG += x86_64
+    QMAKE_MACOSX_DEPLOYMENT_TARGET = "10.10"
 }
 
 win32 {
@@ -28,17 +31,18 @@ win32 {
     } else {
         SUB_LIB = "win32/release"
     }
+
+    # For 'aconf.h', originally the 'aconf-win32.h'.
+    INCLUDEPATH += $$XPDF_DIR/win
+
+    INSTALL_INCLUDES_FILES += "$$PWD/$$XPDF_DIR/win/aconf.h"
 }
 
 
-DESTDIR = "lib/$$SUB_LIB"
+DESTDIR = "$$PWD/lib/$$SUB_LIB"
 
 OBJECTS_DIR  = "objects"
 
-macx {
-    CONFIG += x86_64
-    QMAKE_MACOSX_DEPLOYMENT_TARGET = "10.10"
-}
 
 # Free type includes and lib
 FREETYPE_DIR = "../freetype/freetype-2.6.1"
@@ -160,3 +164,25 @@ SOURCES += $$XPDF_DIR/fofi/FoFiBase.cc \
            $$XPDF_DIR/splash/SplashT1FontEngine.cc \
            $$XPDF_DIR/splash/SplashT1FontFile.cc \
            $$XPDF_DIR/xpdf/OptionalContent.cc
+
+# Now copy required includes files. We don't use qmake 'INSTALLS' because it simply
+# doesn't work on windows (see INSTALL_ROOT), plus we don't want to interfere
+# with existing system libs and includes.
+INSTALL_INCLUDES_PATH = "$$PWD/include"
+mkpath($$INSTALL_INCLUDES_PATH)
+
+# Explicit file copy.
+# From: https://stackoverflow.com/questions/3984104/qmake-how-to-copy-a-file-to-the-output
+win32 {
+    INSTALL_INCLUDES_FILES_WIN = $${INSTALL_INCLUDES_FILES}
+    INSTALL_INCLUDES_FILES_WIN ~= s,/,\\,g
+        DESTDIR_WIN = $${INSTALL_INCLUDES_PATH}
+    DESTDIR_WIN ~= s,/,\\,g
+    for(FILE,INSTALL_INCLUDES_FILES_WIN){
+                QMAKE_POST_LINK +=$$quote(cmd /c copy /y $${FILE} $${DESTDIR_WIN}$$escape_expand(\n\t))
+    }
+} else {
+    for(FILE,INSTALL_INCLUDES_FILES){
+        QMAKE_POST_LINK += $$quote(cp $${FILE} $${INSTALL_INCLUDES_PATH}$$escape_expand(\n\t))
+    }
+}

@@ -29,7 +29,7 @@ win32 {
     }
 }
 
-DESTDIR = "lib/$$SUB_LIB"
+DESTDIR = "$$PWD/lib/$$SUB_LIB"
 OBJECTS_DIR  = "objects"
 
 macx {

@@ -7,8 +7,6 @@ instructions for version 3.04
 - Decompress xpdf-3.04.xx.tar.gz
 
 Windows:
-	- copy xpdf-3.04/aconf-win32.h into xpdf-3.04/aconf.h
-	- edit xpdf-3.04/aconf.h, add this line "#undef UNICODE"
 	- qmake
 	- nmake
 
