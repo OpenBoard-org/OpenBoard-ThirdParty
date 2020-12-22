@@ -21,11 +21,7 @@ macx {
 }
 
 win32 {
-    CONFIG( debug, debug|release ) {
-        SUB_LIB = "win32/debug"
-    } else {
-        SUB_LIB = "win32/release"
-    }
+    SUB_LIB = "win32/debug"
 
     # OpenSSL requirement
     INCLUDEPATH += "$$PWD/../openssl/openssl-1.1.0-win64/include"
