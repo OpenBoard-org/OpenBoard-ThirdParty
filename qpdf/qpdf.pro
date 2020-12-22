@@ -21,7 +21,7 @@ macx {
 }
 
 win32 {
-    SUB_LIB = "win32/debug"
+    SUB_LIB = "win32"
 
     # OpenSSL requirement
     INCLUDEPATH += "$$PWD/../openssl/openssl-1.1.0-win64/include"
@@ -51,7 +51,7 @@ CONFIG( debug, debug|release ) {
 }
 
 
-QPDF_DIR = $$PWD/qpdf-10.0.4/src/
+QPDF_DIR = "$$PWD/qpdf-10.0.4/src"
 
 
 #CRYPTO_NATIVE = \
