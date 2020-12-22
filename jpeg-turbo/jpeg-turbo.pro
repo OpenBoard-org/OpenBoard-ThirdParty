@@ -4,7 +4,7 @@ CONFIG += c++11
 TEMPLATE  = lib
 CONFIG   += staticlib debug_and_release
 
-JPEG_TURBO_SRC_DIR = "$$PWD/2.0.6/src"
+JPEG_TURBO_SRC_DIR = "$$PWD/libjpeg-turbo-2.0.6/src"
 
 unix {
     CONFIG += create_prl
@@ -119,7 +119,7 @@ SOURCES += \
 INCLUDEPATH += \
     $$JPEG_TURBO_SRC_DIR
 
-# Now copy required includes files. We don't use 'INSTALLS' because it simply
+# Now copy required includes files. We don't use qmake 'INSTALLS' because it simply
 # doesn't work on windows (see INSTALL_ROOT), plus we don't want to interfere
 # with existing system libs and includes.
 INSTALL_INCLUDES_PATH = "$$PWD/include"
