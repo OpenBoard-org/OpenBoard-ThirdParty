@@ -2,40 +2,22 @@ QT -= gui
 
 CONFIG += c++11
 
-# You can make your code fail to compile if it uses deprecated APIs.
-# In order to do so, uncomment the following line.
-#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
-
-# Default rules for deployment.
-unix {
-    target.path = $$[QT_INSTALL_PLUGINS]/generic
-}
-!isEmpty(target.path): INSTALLS += target
-
 TEMPLATE  = lib
 CONFIG   += staticlib debug_and_release
 
-QPDF_DIR = "xpdf-3.04"
-
 unix {
-    linux-g++ {
-        CONFIG += create_prl
-        SUB_LIB = "linux"
-    }
-    linux-g++-32 {
-        CONFIG += create_prl
-        SUB_LIB = "linux"
-    }
-    linux-g++-64 {
-        CONFIG += create_prl
-        SUB_LIB = "linux"
-    }
-    message ("Warning: This build is untested on linux. You should probably use the lib qpdf built-in for your system.")
+    CONFIG += create_prl
+    SUB_LIB = "linux"
+
+    message ("Warning: This build is untested on linux.")
 }
 
 macx {
+    CONFIG += x86_64
+    QMAKE_MACOSX_DEPLOYMENT_TARGET = "10.10"
+
     SUB_LIB = "macx"
-    message ("Warning: This build is untested on MAC. You should probably use the lib provided with brew.")
+    message ("Warning: This build is untested on MAC.")
 }
 
 win32 {
@@ -48,8 +30,8 @@ win32 {
     # OpenSSL requirement
     INCLUDEPATH += "$$PWD/../openssl/openssl-1.1.0-win64/include"
 
-    # Lib JPEG requirement
-    INCLUDEPATH += "$$PWD/../libjpeg-turbo/2.0.6/windows/include"
+    # Lib JPEG requirement.
+    INCLUDEPATH += "$$PWD/../jpeg-turbo/include"
 
     # Lib zlib requirement
     INCLUDEPATH += "$$PWD/../zlib/1.2.11/include"
@@ -57,13 +39,19 @@ win32 {
     DEFINES += USE_CRYPTO_OPENSSL
 }
 
-DESTDIR = "lib/$$SUB_LIB"
+# Make sure we don't mix release/debug lib.
+CONFIG( debug, debug|release ) {
+    SUB_LIB = "$$SUB_LIB/debug"
+} else {
+    SUB_LIB = "$$SUB_LIB/release"
+}
+DESTDIR = "$$PWD/lib/$$SUB_LIB"
 
-OBJECTS_DIR  = "objects"
-
-macx {
-    CONFIG += x86_64
-    QMAKE_MACOSX_DEPLOYMENT_TARGET = "10.10"
+# Prevents 'debug/release' object mixing when not using shadow builds.
+CONFIG( debug, debug|release ) {
+    OBJECTS_DIR = "objects/debug"
+} else {
+    OBJECTS_DIR = "objects/release"
 }
 
 
@@ -165,6 +153,30 @@ SRCS_libqpdf = \
 
 INCLUDEPATH += $$QPDF_DIR/libqpdf \
                $$QPDF_DIR/include
+
 SOURCES += $$CRYPTO_OPENSSL \
            $$SRCS_libqpdf \
-           qpdf-10.0.4/src/libqpdf/msvc_compatibility.cpp
+           $$QPDF_DIR/libqpdf/msvc_compatibility.cpp
+
+# Now copy required includes files. We don't use qmake 'INSTALLS' because it simply
+# doesn't work on windows (see INSTALL_ROOT), plus we don't want to interfere
+# with existing system libs and includes.
+INSTALL_INCLUDES_PATH = "$$PWD/include/qpdf"
+mkpath($$INSTALL_INCLUDES_PATH)
+INSTALL_INCLUDES_FILES += "$$QPDF_DIR/include/qpdf/*"
+
+# Explicit file copy.
+# From: https://stackoverflow.com/questions/3984104/qmake-how-to-copy-a-file-to-the-output
+win32 {
+    INSTALL_INCLUDES_FILES_WIN = $${INSTALL_INCLUDES_FILES}
+    INSTALL_INCLUDES_FILES_WIN ~= s,/,\\,g
+        DESTDIR_WIN = $${INSTALL_INCLUDES_PATH}
+    DESTDIR_WIN ~= s,/,\\,g
+    for(FILE,INSTALL_INCLUDES_FILES_WIN){
+                QMAKE_POST_LINK +=$$quote(cmd /c copy /y $${FILE} $${DESTDIR_WIN}$$escape_expand(\n\t))
+    }
+} else {
+    for(FILE,INSTALL_INCLUDES_FILES){
+        QMAKE_POST_LINK += $$quote(cp $${FILE} $${INSTALL_INCLUDES_PATH}$$escape_expand(\n\t))
+    }
+}

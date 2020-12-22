@@ -52,6 +52,7 @@ win32 {
     contains (DEFINES, USE_XPDF) {
         LIBS        += "-L$$PWD/xpdf/lib/$$SUB_LIB" "-lxpdf"
         XPDF_DIR     = "$$PWD/xpdf/xpdf-3.04"
+        INCLUDEPATH += "$$PWD/xpdf/include"
         INCLUDEPATH += "$$XPDF_DIR"
         INCLUDEPATH += "$$XPDF_DIR/goo"
         INCLUDEPATH += "$$XPDF_DIR/splash"
@@ -70,10 +71,10 @@ win32 {
 
     # QPDF
     LIBS += "-L$$PWD/qpdf/lib/$$SUB_LIB" "-lqpdf"
-    LIBS += "-L$$PWD/libjpeg-turbo/2.0.6/windows/lib" "-ljpeg-static"
+    LIBS += "-L$$PWD/jpeg-turbo/lib/$$SUB_LIB" "-ljpeg-turbo"
     DEFINES += USE_CRYPTO_OPENSSL
-    INCLUDEPATH += "$$PWD/qpdf/qpdf-10.0.4/windows/include"
-    INCLUDEPATH += "$$PWD/libjpeg-turbo/2.0.6/windows/include"
+    INCLUDEPATH += "$$PWD/qpdf/include"
+    INCLUDEPATH += "$$PWD/jpeg-turbo/include"
 
     INCLUDEPATH += "$$PWD/openssl/openssl-1.1.0-win64/include"
     QMAKE_LIBDIR += "$$PWD/openssl/openssl-1.1.0-win64/lib"

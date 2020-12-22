@@ -48,6 +48,7 @@ win32 {
     INSTALL_INCLUDES_FILES += "$$JPEG_TURBO_SRC_DIR/win/jconfig.h"
 }
 
+# Make sure we don't mix release/debug lib.
 CONFIG( debug, debug|release ) {
     SUB_LIB = "$$SUB_LIB/debug"
 } else {
