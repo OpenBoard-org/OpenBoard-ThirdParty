@@ -55,8 +55,8 @@ win32 {
     INCLUDEPATH += "$$XPDF_DIR/goo"
     INCLUDEPATH += "$$XPDF_DIR/splash"
 
-    INCLUDEPATH += "$$PWD/openssl/openssl-1.1.0-win64/include"
-    QMAKE_LIBDIR += "$$PWD/openssl/openssl-1.1.0-win64/lib"
+    INCLUDEPATH += "$$PWD/openssl/openssl-1.1.1j-win64/include"
+    QMAKE_LIBDIR += "$$PWD/openssl/openssl-1.1.1j-win64/lib"
 
     LIBS += -llibssl
     LIBS += -llibcrypto
