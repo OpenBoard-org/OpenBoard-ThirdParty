@@ -16,7 +16,6 @@ xpdf/objects
 xpdf/xpdf-3.04/Makefile
 xpdf/xpdf-3.04/config.log
 xpdf/xpdf-3.04/config.status
-xpdf/xpdf-3.04/aconf.h
 xpdf/xpdf-3.04/*/Makefile
 
 
