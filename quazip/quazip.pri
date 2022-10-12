@@ -1,18 +1,18 @@
-INCLUDEPATH  += "$$PWD/../zlib/1.2.8/include" \
-                "$$PWD/quazip-0.7.1"
+INCLUDEPATH  += "$$PWD/../zlib/1.2.11/include" \
+                "$$PWD/quazip"
 
 DEFINES += QUAZIP_STATIC
 
 HEADERS += \
-    $$PWD/quazip-0.7.1/crypt.h \
-    $$PWD/quazip-0.7.1/quazip_global.h \
-    $$PWD/quazip-0.7.1/ioapi.h \
-    $$PWD/quazip-0.7.1/quazip.h \
-    $$PWD/quazip-0.7.1/quazipfile.h \
-    $$PWD/quazip-0.7.1/quazipfileinfo.h \
-    $$PWD/quazip-0.7.1/quazipnewinfo.h \
-    $$PWD/quazip-0.7.1/unzip.h \
-    $$PWD/quazip-0.7.1/zip.h \
+    $$PWD/quazip/crypt.h \
+    $$PWD/quazip/quazip_global.h \
+    $$PWD/quazip/ioapi.h \
+    $$PWD/quazip/quazip.h \
+    $$PWD/quazip/quazipfile.h \
+    $$PWD/quazip/quazipfileinfo.h \
+    $$PWD/quazip/quazipnewinfo.h \
+    $$PWD/quazip/unzip.h \
+    $$PWD/quazip/zip.h \
     $$PWD/../zlib/1.2.11/include/zlib.h
 
 

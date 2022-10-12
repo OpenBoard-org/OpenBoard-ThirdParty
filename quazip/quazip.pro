@@ -5,7 +5,7 @@ CONFIG  += staticlib debug_and_release
 # than qmake or using QuaZIP sources directly in your project.
 DEFINES += QUAZIP_STATIC
 
-QUAZIP_SRC_PATH = "quazip-0.7.1"
+QUAZIP_SRC_PATH = "quazip"
 
 unix {
     linux-g++ {
@@ -22,7 +22,8 @@ unix {
 macx {
     SUB_LIB = "macx"
     CONFIG += x86_64
-    QMAKE_MACOSX_DEPLOYMENT_TARGET = "10.10"
+    CONGIG += arm64
+    QMAKE_MACOSX_DEPLOYMENT_TARGET = "10.15"
 }
 
 win32 {
