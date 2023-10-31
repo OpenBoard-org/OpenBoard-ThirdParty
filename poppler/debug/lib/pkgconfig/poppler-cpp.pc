@@ -1,0 +1,13 @@
+prefix=${pcfiledir}/../..
+libdir=${prefix}/lib
+includedir=${prefix}/../include
+
+Name: poppler-cpp
+Description: cpp backend for Poppler PDF rendering library
+Version: 23.01.0
+Requires: 
+Requires.private: poppler = 23.01.0
+
+Libs: "-L${libdir}" -lpoppler-cpp
+Cflags: "-I${includedir}/poppler/cpp"
+

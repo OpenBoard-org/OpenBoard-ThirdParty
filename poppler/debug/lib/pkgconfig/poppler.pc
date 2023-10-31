@@ -1,0 +1,12 @@
+prefix=${pcfiledir}/../..
+libdir=${prefix}/lib
+includedir=${prefix}/../include
+
+Name: poppler
+Description: PDF rendering library
+Version: 23.01.0
+
+Requires.private: freetype2 libjpeg libopenjp2 libpng libtiff-4 poppler-vcpkg-iconv zlib
+Libs: "-L${libdir}" -lpoppler
+Cflags: "-I${includedir}/poppler"
+

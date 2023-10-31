@@ -1,0 +1,5 @@
+prefix=${pcfiledir}/../..
+Name: poppler-vcpkg-iconv
+Description: iconv linking requirements for poppler
+Version: 0
+Libs: -liconv -lcharset

@@ -38,25 +38,33 @@ win32 {
         SUB_LIB = "win32/release"
     }
 
-    DEFINES += USE_XPDF
+#    DEFINES += USE_XPDF
 
-    FREETYPE_DIR = "$PWD/freetype/freetype-2.6.1"
-
-    LIBS        += "-L$$PWD/freetype/lib/$$SUB_LIB" "-lfreetype"
-    # no INCLUDEPATH, freetype is not used directly
+    #FREETYPE
+    FREETYPE_DIR = "$$PWD/freetype"
+    CONFIG( debug, debug|release ) {
+        LIBS        += "-L$$FREETYPE_DIR/debug/lib" "-lfreetyped"
+    } else {
+        LIBS        += "-L$$FREETYPE_DIR/lib" "-lfreetype"
+        # no INCLUDEPATH, freetype is not used directly
+    }
 
     QUAZIP_DIR   = "$$PWD/quazip"
     LIBS        += "-L$$QUAZIP_DIR/lib/$$SUB_LIB" "-lquazip"
     INCLUDEPATH += "$$PWD/zlib/1.2.11/include"
 
-    LIBS        += "-L$$PWD/xpdf/lib/$$SUB_LIB" "-lxpdf"
-    XPDF_DIR     = "$$PWD/xpdf/xpdf-3.04"
-    INCLUDEPATH += "$$XPDF_DIR"
-    INCLUDEPATH += "$$XPDF_DIR/goo"
-    INCLUDEPATH += "$$XPDF_DIR/splash"
-
     INCLUDEPATH += "$$PWD/openssl/openssl-1.1.1j-win64/include"
     QMAKE_LIBDIR += "$$PWD/openssl/openssl-1.1.1j-win64/lib"
+
+    #POPPLER
+    POPPLER_DIR  = "$$PWD/poppler"
+    INCLUDEPATH += "$$POPPLER_DIR/include"
+    INCLUDEPATH += "$$POPPLER_DIR/include/poppler"
+    CONFIG( debug, debug|release ) {
+        LIBS        += "-L$$POPPLER_DIR/debug/lib" "-lpoppler"
+    } else {
+        LIBS        += "-L$$POPPLER_DIR/lib" "-lpoppler"
+    }
 
     LIBS += -llibssl
     LIBS += -llibcrypto
