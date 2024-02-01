@@ -38,17 +38,6 @@ win32 {
         SUB_LIB = "win32/release"
     }
 
-#    DEFINES += USE_XPDF
-
-    #FREETYPE
-    FREETYPE_DIR = "$$PWD/freetype"
-    CONFIG( debug, debug|release ) {
-        LIBS        += "-L$$FREETYPE_DIR/debug/lib" "-lfreetyped"
-    } else {
-        LIBS        += "-L$$FREETYPE_DIR/lib" "-lfreetype"
-        # no INCLUDEPATH, freetype is not used directly
-    }
-
     QUAZIP_DIR   = "$$PWD/quazip"
     LIBS        += "-L$$QUAZIP_DIR/lib/$$SUB_LIB" "-lquazip"
     INCLUDEPATH += "$$PWD/zlib/1.2.11/include"
