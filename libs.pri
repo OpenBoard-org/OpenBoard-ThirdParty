@@ -60,10 +60,6 @@ win32 {
 
     LIBS += -lWmvcore
     LIBS += -lWinmm
-
-    # need those link if we want to change default printer and print usind shell command
-    LIBS        += "-L$$PWD/microsoft/lib" "-lWinspool"
-    LIBS        += "-L$$PWD/microsoft/lib" "-lshell32"
 }
 
 macx {
