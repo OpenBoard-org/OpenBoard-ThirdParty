@@ -4,7 +4,7 @@ INCLUDEPATH  += "$$PWD/../zlib/1.2.11/include" \
 DEFINES += QUAZIP_STATIC
 
 HEADERS += \
-    $$PWD/quazip/crypt.h \
+    $$PWD/quazip/minizip_crypt.h \
     $$PWD/quazip/quazip_global.h \
     $$PWD/quazip/ioapi.h \
     $$PWD/quazip/quazip.h \

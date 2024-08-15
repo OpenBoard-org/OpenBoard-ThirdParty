@@ -48,7 +48,7 @@ INCLUDEPATH += . \
 
 # Input
 HEADERS += "$$PWD/../zlib/1.2.11/include/zlib.h" \
-           $$QUAZIP_SRC_PATH/crypt.h \   
+           $$QUAZIP_SRC_PATH/minizip_crypt.h \
            $$QUAZIP_SRC_PATH/ioapi.h \
            $$QUAZIP_SRC_PATH/quazip.h \
            $$QUAZIP_SRC_PATH/quazipfile.h \
