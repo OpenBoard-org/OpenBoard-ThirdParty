@@ -1,0 +1,9 @@
+prefix=C:/b/abs_25mqphatbo/croot/openssl_1725545335595/_h_env/Library 
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: OpenSSL
+Description: Secure Sockets Layer and cryptography libraries and tools
+Requires: libssl libcrypto
+Version: 3.0.15 
