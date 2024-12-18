@@ -42,8 +42,8 @@ win32 {
     LIBS        += "-L$$QUAZIP_DIR/lib/$$SUB_LIB" "-lquazip"
     INCLUDEPATH += "$$PWD/zlib/1.2.11/include"
 
-    INCLUDEPATH += "$$PWD/openssl/openssl-1.1.1j-win64/include"
-    QMAKE_LIBDIR += "$$PWD/openssl/openssl-1.1.1j-win64/lib"
+    INCLUDEPATH += "$$PWD/openssl/openssl-3.0.15-win64/include"
+    QMAKE_LIBDIR += "$$PWD/openssl/openssl-3.0.15-win64/lib"
 
     #POPPLER
     POPPLER_DIR  = "$$PWD/poppler"
